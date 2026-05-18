@@ -1,17 +1,15 @@
 receivers:
-
   otlp:
     protocols:
       grpc:
       http:
 
 processors:
-
   batch:
 
 exporters:
 
-  otlp/tempo:
+  otlp:
     endpoint: tempo:4317
 
     tls:
@@ -21,10 +19,8 @@ exporters:
     verbosity: detailed
 
 service:
-
   pipelines:
-
     traces:
       receivers: [otlp]
       processors: [batch]
-      exporters: [otlp/tempo, debug]
+      exporters: [otlp, debug]
