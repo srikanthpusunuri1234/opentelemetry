@@ -1,0 +1,28 @@
+receivers:
+
+  otlp:
+    protocols:
+      grpc:
+
+processors:
+
+  batch:
+
+exporters:
+
+  otlp:
+    endpoint: tempo:4317
+    tls:
+      insecure: true
+
+  logging:
+    verbosity: detailed
+
+service:
+
+  pipelines:
+
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlp, logging]
